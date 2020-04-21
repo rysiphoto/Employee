@@ -17,6 +17,18 @@ const render = require("./lib/htmlRenderer");
 
 inquirer.prompt([
     {
+        type: "list",
+        name: "role",
+        message: "Employee's Job Role: ",
+        choices: [
+            "Engineer",
+            "Manager",
+            "Intern",
+            "I am done adding employees."
+        ]
+
+    },
+    {
         type: "input",
         name: "name",
         message: "Please enter employee's first and last name: "
@@ -35,25 +47,36 @@ inquirer.prompt([
 
     },
     {
-        type: "list",
-        name: "role",
-        message: "Employee's Job Role: ",
-        choices: [
-            "Engineer",
-            "Manager",
-            "Intern"
-        ]
-
+        type: "input",
+        name: "school",
+        message: "School Name: "
     },
     {
         type: "input",
         name: "github",
         message: "What is your GitHub Name? "
 
+    },
+    {
+        type: "input",
+        name: "officeNumber",
+        message: "Office Number: "
     }
+
+
 ]).then(answers => {
-    const newEmployee = new Employee(answers.name, answers.email, answers.id, answers.role, answers.github, answers.officeNumber);
+    console.log(answers);
+    // if (this.role === Engineer) {
+    //     const newEngineer = new Engineer(answers.role, answers.name, answers.email, answers.id, answers.github);
+    // } if (this.role === Manager) {
+    //     const newManager = new Manager(answers.role, answers.name, answers.email, answers.id, answers.officeNumber);
+    // } if (this.role === Intern) {
+    //     const newIntern = new Intern(answers.role, answers.name, answers.email, answers.id, answers.school);
+    // } else {
+    //     return;
+    // }
 })
+
 
 
 
