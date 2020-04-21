@@ -31,36 +31,77 @@ inquirer.prompt([
     {
         type: "input",
         name: "name",
-        message: "Please enter employee's first and last name: "
+        message: "Please enter employee's first and last name: ",
+        validate: function (value) {
+            if (value.length) {
+                return true;
+            } else {
+                return `Please enter the employee's name: `;
+            }
+        }
 
     },
     {
         type: "input",
         name: "id",
-        message: "Employee ID#: "
+        message: "Employee ID#: ",
+        validate: function (value) {
+            if (value.length) {
+                return true;
+            } else {
+                return `Please enter the employee's ID number: `;
+            }
+        }
 
     },
     {
         type: "input",
         name: "email",
-        message: "Employee e-mail address: "
-
+        message: "Employee e-mail address: ",
+        validate: function (value) {
+            if (value.length) {
+                return true;
+            } else {
+                return `Please enter the employee's e-mail address: `;
+            }
+        }
     },
     {
         type: "input",
         name: "school",
-        message: "School Name: "
+        message: "School Name: ",
+        validate: function (value) {
+            if (value.length) {
+                return true;
+            } else {
+                return `Please enter the Intern's school name: `;
+            }
+        }
     },
     {
         type: "input",
         name: "github",
-        message: "What is your GitHub Name? "
+        message: "What is your GitHub Name? ",
+        validate: function (value) {
+            if (value.length) {
+                return true;
+            } else {
+                return `Please enter the engineer's GitHub user name: `;
+            }
+        }
 
     },
     {
         type: "input",
         name: "officeNumber",
-        message: "Office Number: "
+        message: "Office Number: ",
+        validate: function (value) {
+            if (value.length) {
+                return true;
+            } else {
+                return `Please enter the manager's office number: `;
+            }
+        }
     }
 
 
