@@ -14,20 +14,7 @@ const render = require("./lib/htmlRenderer");
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
-
-inquirer.prompt([
-    {
-        type: "list",
-        name: "role",
-        message: "Employee's Job Role: ",
-        choices: [
-            "Engineer",
-            "Manager",
-            "Intern",
-            "I am done adding employees."
-        ]
-
-    },
+const generalQs = ([
     {
         type: "input",
         name: "name",
@@ -65,60 +52,102 @@ inquirer.prompt([
                 return `Please enter the employee's e-mail address: `;
             }
         }
-    },
-    {
-        type: "input",
-        name: "school",
-        message: "School Name: ",
-        validate: function (value) {
-            if (value.length) {
-                return true;
-            } else {
-                return `Please enter the Intern's school name: `;
-            }
-        }
-    },
-    {
-        type: "input",
-        name: "github",
-        message: "What is your GitHub Name? ",
-        validate: function (value) {
-            if (value.length) {
-                return true;
-            } else {
-                return `Please enter the engineer's GitHub user name: `;
-            }
-        }
-
-    },
-    {
-        type: "input",
-        name: "officeNumber",
-        message: "Office Number: ",
-        validate: function (value) {
-            if (value.length) {
-                return true;
-            } else {
-                return `Please enter the manager's office number: `;
-            }
-        }
     }
+]);
+
+// Question sets
+const managerQs = [...generalQs, {
+
+}];
+const engineerQs = [...generalQs, {
+
+}];
+
+const internQs = [...generalQs, {
+
+}];
 
 
-]).then(answers => {
-    console.log(answers);
-    // if (this.role === Engineer) {
-    //     const newEngineer = new Engineer(answers.role, answers.name, answers.email, answers.id, answers.github);
-    // } if (this.role === Manager) {
-    //     const newManager = new Manager(answers.role, answers.name, answers.email, answers.id, answers.officeNumber);
-    // } if (this.role === Intern) {
-    //     const newIntern = new Intern(answers.role, answers.name, answers.email, answers.id, answers.school);
-    // } else {
-    //     return;
-    // }
-})
+function createEmployeeMenu() {
+    inquirer.prompt([
+        {
+            type: "list",
+            name: "role",
+            message: "Employee's Job Role: ",
+            choices: [
+                "Engineer",
+                "Manager",
+                "Intern",
+                "I am done adding employees."
+            ]
+
+        }.then(answers => {
+            switch (answers.employeeType) {
+                case "Manager":
+                    return askManagerQuestions();
+                case "Engineer":
+                    return askEngineerQuestions();
+                case "Intern":
+                    return askInternQuestions();
+                case "Done":
+
+            }
+        }),
+        ,
+
+        {
+            type: "input",
+            name: "school",
+            message: "School Name: ",
+            validate: function (value) {
+                if (value.length) {
+                    return true;
+                } else {
+                    return `Please enter the Intern's school name: `;
+                }
+            }
+        },
+        {
+            type: "input",
+            name: "github",
+            message: "What is your GitHub Name? ",
+            validate: function (value) {
+                if (value.length) {
+                    return true;
+                } else {
+                    return `Please enter the engineer's GitHub user name: `;
+                }
+            }
+
+        },
+        {
+            type: "input",
+            name: "officeNumber",
+            message: "Office Number: ",
+            validate: function (value) {
+                if (value.length) {
+                    return true;
+                } else {
+                    return `Please enter the manager's office number: `;
+                }
+            }
+        }
 
 
+    ]).then(answers => {
+        console.log(answers);
+        // if (this.role === Engineer) {
+        //     const newEngineer = new Engineer(answers.role, answers.name, answers.email, answers.id, answers.github);
+        // } if (this.role === Manager) {
+        //     const newManager = new Manager(answers.role, answers.name, answers.email, answers.id, answers.officeNumber);
+        // } if (this.role === Intern) {
+        //     const newIntern = new Intern(answers.role, answers.name, answers.email, answers.id, answers.school);
+        // } else {
+        //     return;
+        // }
+    })
+
+}
 
 
 // After the user has input all employees desired, call the `render` function (required
